@@ -1,0 +1,59 @@
+package com.app.admin.controller;
+
+import com.app.admin.dto.ModifyUserDTO;
+import com.app.admin.dto.UserDTO;
+import com.app.admin.mapper.UserMapper;
+import com.app.admin.services.UserManageService;
+import com.app.standard.common.ReturnCode;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+
+@RestController
+public class LoginController {
+
+    @Autowired
+    private UserManageService auth;
+
+    @Autowired
+    private UserMapper userMapper;
+
+    @RequestMapping("/login")
+    public ReturnCode login(@RequestBody UserDTO user)
+    {
+       String jws = auth.isLogin(user);
+       if(jws == null){
+           return ReturnCode.fail("用户不存在");
+       }
+
+        Map<String,String> token = new HashMap<>();
+       token.put("token",jws);
+       return ReturnCode.success(token);
+
+    }
+
+    @RequestMapping(value="/register")
+    public ReturnCode register(@RequestBody UserDTO user)
+    {
+        auth.userRegister(user);
+
+        return ReturnCode.success();
+    }
+
+    @RequestMapping(value="/modify")
+    public ReturnCode modifyPassword(@RequestBody ModifyUserDTO user)
+    {
+        auth.updateUserInfo(user);
+
+        return ReturnCode.success();
+    }
+
+    @RequestMapping(value="/all")
+    public ReturnCode getAll()
+    {
+        return ReturnCode.success(userMapper.getAll());
+    }
+}

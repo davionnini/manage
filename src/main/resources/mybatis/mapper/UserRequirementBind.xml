@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.app.admin.mapper.UserMapper">
+    <resultMap id="bindResultMap" type="com.app.admin.model.User.User">
+        <id property="id" column="id" />
+        <result property="userId" column="user_id"/>
+        <result property="requirementId" column="requirement_id"/>
+        <result property="isBind" column="is_bind"/>
+        <result property="isDelete" column="is_delete"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+    <select id="getAll" resultMap="userResultMap">
+        select * from user_reqiurement_bind where is_delete = 1
+    </select>
+    <insert id="insert" parameterType="com.app.admin.model.User.User">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO user_reqiurement_bind
+            (`user_id`,`requirement_id`)
+        VALUES
+            (#{userId},#{requirementId})
+    </insert>
+
+    <select id="getByNameAndPassword" parameterType="java.lang.String" resultMap="userResultMap">
+          select * from user where is_delete = 1 and user_name = #{username} AND password = #{password}
+    </select>
+
+    <select id="getByName" parameterType="java.lang.String" resultMap="userResultMap">
+          select * from user_reqiurement_bind where is_delete = 1 and user_name = #{username}
+    </select>
+
+    <update id="updateByPrimaryKey" parameterType="com.app.admin.model.User.User">
+        UPDATE TABLE `user_reqiurement_bind`
+        <set>
+            <if test="username != null">
+                name = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                sort = #{password,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+</mapper>
