@@ -3,6 +3,7 @@ package com.app.admin.services.imp;
 import com.app.admin.dto.ModifyUserDTO;
 import com.app.admin.dto.UserDTO;
 import com.app.admin.mapper.UserMapper;
+import com.app.admin.model.Func.FuncModel;
 import com.app.admin.model.User.User;
 import com.app.admin.services.UserManageService;
 import com.app.admin.utils.JwtTokenUtil;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -104,16 +106,40 @@ public class UserManageServiceImp implements UserManageService {
     {
         User userModel = new User();
 
-        if(userMapper.getByName(userDTO.getUsername()) == null){
+        long id = Integer.valueOf(getTokenField(userDTO.getToken(),"userId"));
+
+        if(userMapper.getById(id) != null){
             userModel.setPassword(userDTO.getPassword());
-            userModel.setUserName(userDTO.getUsername());
 
             //获取用户id
-            long id = Integer.valueOf(getTokenField(userDTO.getToken(),"userId"));
             userModel.setId(id);
             userMapper.updateByPrimaryKey(userModel);
         }
         return true;
 
     }
+
+
+    /**
+     * 用户列表
+     * @return
+     */
+    public List<User> userList()
+    {
+        return userMapper.getAll();
+    }
+
+
+    /**
+     * 菜单
+     * @param token
+     * @return
+     */
+    public List<FuncModel> funcList(String token)
+    {
+        long userId = Integer.valueOf(getTokenField(token,"userId"));
+        return userMapper.funcList(userId);
+    }
+
+
 }

@@ -2,7 +2,10 @@ package com.app.admin.services;
 
 import com.app.admin.dto.ModifyUserDTO;
 import com.app.admin.dto.UserDTO;
+import com.app.admin.model.Func.FuncModel;
 import com.app.admin.model.User.User;
+
+import java.util.List;
 
 
 public interface UserManageService {
@@ -17,4 +20,8 @@ public interface UserManageService {
     Boolean userRegister(UserDTO user);
 
     Boolean updateUserInfo(ModifyUserDTO user);
+
+    List<User> userList();
+
+    List<FuncModel> funcList(String token);
 }

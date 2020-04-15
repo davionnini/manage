@@ -8,10 +8,12 @@ import com.app.admin.model.UserRequirementBind.UserRequirementBind;
 import com.app.admin.services.MaterialsManageService;
 import com.app.admin.utils.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
 public class MaterialsManageServiceImp implements MaterialsManageService {
 
     @Autowired
@@ -49,7 +51,7 @@ public class MaterialsManageServiceImp implements MaterialsManageService {
         requirementModel.setOrderId(System.currentTimeMillis());
 
         long requirementId = requirement.insert(requirementModel);
-        long id = Integer.valueOf(jwtTokenUtil.getBodyField(materialsDTO.getToekn(),"userId"));
+        long id = Integer.valueOf(jwtTokenUtil.getBodyField(materialsDTO.getToken(),"userId"));
         bindModel.setRequirementId(requirementId);
         bindModel.setUserId(id);
 
@@ -71,7 +73,6 @@ public class MaterialsManageServiceImp implements MaterialsManageService {
         requirementModel.setCount(materialsDTO.getCount());
         requirementModel.setGoodName(materialsDTO.getGoodName());
         requirementModel.setDescribe(materialsDTO.getDescribe());
-
 
         return requirement.updateByPrimaryKey(requirementModel);
     }

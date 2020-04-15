@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.app.admin.mapper.UserMapper">
-    <resultMap id="bindResultMap" type="com.app.admin.model.User.User">
+<mapper namespace="com.app.admin.mapper.UserRequireBindMapper">
+    <resultMap id="bindResultMap" type="com.app.admin.model.UserRequirementBind.UserRequirementBind">
         <id property="id" column="id" />
         <result property="userId" column="user_id"/>
         <result property="requirementId" column="requirement_id"/>
@@ -10,10 +10,10 @@
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
     </resultMap>
-    <select id="getAll" resultMap="userResultMap">
+    <select id="getAll" resultMap="bindResultMap">
         select * from user_reqiurement_bind where is_delete = 1
     </select>
-    <insert id="insert" parameterType="com.app.admin.model.User.User">
+    <insert id="insert" parameterType="com.app.admin.mapper.UserRequireBindMapper">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -23,16 +23,16 @@
             (#{userId},#{requirementId})
     </insert>
 
-    <select id="getByNameAndPassword" parameterType="java.lang.String" resultMap="userResultMap">
+    <select id="getByNameAndPassword" parameterType="java.lang.String" resultMap="bindResultMap">
           select * from user where is_delete = 1 and user_name = #{username} AND password = #{password}
     </select>
 
-    <select id="getByName" parameterType="java.lang.String" resultMap="userResultMap">
+    <select id="getByName" parameterType="java.lang.String" resultMap="bindResultMap">
           select * from user_reqiurement_bind where is_delete = 1 and user_name = #{username}
     </select>
 
-    <update id="updateByPrimaryKey" parameterType="com.app.admin.model.User.User">
-        UPDATE TABLE `user_reqiurement_bind`
+    <update id="updateByPrimaryKey" parameterType="com.app.admin.mapper.UserRequireBindMapper">
+        UPDATE `user_reqiurement_bind`
         <set>
             <if test="username != null">
                 name = #{username,jdbcType=VARCHAR},
@@ -43,5 +43,4 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
-
 </mapper>

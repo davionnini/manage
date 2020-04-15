@@ -13,7 +13,7 @@ public class MaterialsDTO {
 
     String goodName;
 
-    String toekn;
+    String token;
 
     public long getId() {
         return id;
@@ -47,12 +47,11 @@ public class MaterialsDTO {
         this.goodName = goodName;
     }
 
-
-    public String getToekn() {
-        return toekn;
+    public String getToken() {
+        return token;
     }
 
-    public void setToekn(String toekn) {
-        this.toekn = toekn;
+    public void setToken(String token) {
+        this.token = token;
     }
 }

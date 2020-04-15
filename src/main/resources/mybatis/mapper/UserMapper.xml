@@ -31,14 +31,25 @@
           select * from user where is_delete = 1 and user_name = #{username}
     </select>
 
+    <select id="getById" parameterType="java.lang.Long" resultMap="userResultMap">
+          select * from user where is_delete = 1 and id = #{id}
+    </select>
+
+    <select id="funcList" resultMap="com.app.admin.model.Func.FuncModel">
+        SELECT
+	        d.*
+        FROM
+	        role_user AS a
+	        JOIN USER AS b ON a.user_id = b.id
+	        JOIN role AS c ON a.role_id = c.id
+	        JOIN func_role AS d ON c.id = d.role_id
+    </select>
+
     <update id="updateByPrimaryKey" parameterType="com.app.admin.model.User.User">
-        UPDATE TABLE `user`
+        UPDATE `user`
         <set>
-            <if test="username != null">
-                name = #{username,jdbcType=VARCHAR},
-            </if>
             <if test="password != null">
-                sort = #{password,jdbcType=INTEGER},
+                sort = #{password,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=BIGINT}

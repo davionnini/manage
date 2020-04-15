@@ -18,8 +18,6 @@ public class LoginController {
     @Autowired
     private UserManageService auth;
 
-    @Autowired
-    private UserMapper userMapper;
 
     @RequestMapping("/login")
     public ReturnCode login(@RequestBody UserDTO user)
@@ -54,6 +52,6 @@ public class LoginController {
     @RequestMapping(value="/all")
     public ReturnCode getAll()
     {
-        return ReturnCode.success(userMapper.getAll());
+        return ReturnCode.success(auth.userList());
     }
 }

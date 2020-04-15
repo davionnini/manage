@@ -1,15 +1,16 @@
 package com.app.admin.controller;
 
 import com.app.admin.dto.MaterialsDTO;
-import com.app.admin.mapper.RequirementMapper;
+
 import com.app.admin.services.MaterialsManageService;
-import com.app.admin.services.UserManageService;
 import com.app.standard.common.ReturnCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
 public class MaterialsManagerController {
 
     @Autowired
