@@ -2,7 +2,6 @@ package com.app.admin.controller;
 
 import com.app.admin.dto.ModifyUserDTO;
 import com.app.admin.dto.UserDTO;
-import com.app.admin.mapper.UserMapper;
 import com.app.admin.services.UserManageService;
 import com.app.standard.common.ReturnCode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
-
 
 @RestController
 public class LoginController {
@@ -22,6 +20,8 @@ public class LoginController {
     @RequestMapping("/login")
     public ReturnCode login(@RequestBody UserDTO user)
     {
+        System.out.println("dasas");
+        System.out.println(user.toString());
        String jws = auth.isLogin(user);
        if(jws == null){
            return ReturnCode.fail("用户不存在");

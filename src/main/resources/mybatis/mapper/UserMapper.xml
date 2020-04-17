@@ -10,6 +10,15 @@
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
     </resultMap>
+    <resultMap id="FuncResultMap" type="com.app.admin.model.Func.FuncModel">
+        <id property="id" column="id" />
+        <result property="funcName" column="func_name"/>
+        <result property="funcDesc" column="func_desc"/>
+        <result property="funcUrl" column="func_url"/>
+        <result property="isDelete" column="is_delete"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
     <select id="getAll" resultMap="userResultMap">
         select * from user where is_delete = 1
     </select>
@@ -35,7 +44,7 @@
           select * from user where is_delete = 1 and id = #{id}
     </select>
 
-    <select id="funcList" resultMap="com.app.admin.model.Func.FuncModel">
+    <select id="funcList" resultMap="FuncResultMap">
         SELECT
 	        d.*
         FROM
