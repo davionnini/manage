@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.app.admin.mapper.FuncMapper">
+    <resultMap id="requireResultMap" type="com.app.admin.model.Func.Func">
+        <id property="id" column="id" />
+        <result property="funcDesc" column="func_desc"/>
+        <result property="funcName" column="func_name"/>
+        <result property="funcUrl" column="func_url"/>
+        <result property="isDelete" column="is_delete"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+    <select id="getAll" resultMap="requireResultMap">
+        select * from func where is_delete = 1
+    </select>
+
+    <select id="getById" parameterType="java.lang.Integer" resultMap="requireResultMap">
+        select * from func where is_delete = 1 where id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="com.app.admin.model.Func.Func">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO func
+        (`func_name`,`func_desc`,`func_url`)
+        VALUES
+        (#{funcName},#{desc},#{funcUrl})
+    </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.app.admin.model.Func.Func">
+        UPDATE `func`
+        <set>
+            <if test="goodName != null">
+                `func_name` = #{funcName,jdbcType=VARCHAR},
+            </if>
+            <if test="count != null">
+                `func_desc` = #{funcDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="describe != null">
+                `func_url` = #{funcUrl,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <delete id="delete" parameterType="java.lang.Long">
+        delete from func where id=#{id}
+    </delete>
+</mapper>

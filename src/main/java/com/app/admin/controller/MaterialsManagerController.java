@@ -10,32 +10,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 需求面板
+ */
+@RequestMapping("/materials")
 @RestController
 public class MaterialsManagerController {
 
     @Autowired
     MaterialsManageService materialsManageService;
 
-    @RequestMapping("materials/manager")
+    @RequestMapping("/manager")
     public ReturnCode list(@RequestParam String token)
     {
         return ReturnCode.success(materialsManageService.MaterialsList());
     }
 
-    @RequestMapping("materials/create")
+    @RequestMapping("/create")
     public Boolean create(@RequestBody MaterialsDTO materialsDTO)
     {
         materialsManageService.sendRequirement(materialsDTO);
         return true;
     }
 
-    @RequestMapping("materials/delete")
+    @RequestMapping("/delete")
     public Boolean delete(@RequestParam long id)
     {
         return true;
     }
 
-    @RequestMapping("materials/update")
+    @RequestMapping("/update")
     public Boolean update(@RequestBody MaterialsDTO materialsDTO)
     {
         materialsManageService.updateRequirement(materialsDTO);

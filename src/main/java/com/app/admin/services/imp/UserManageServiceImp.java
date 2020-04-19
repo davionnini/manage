@@ -3,7 +3,7 @@ package com.app.admin.services.imp;
 import com.app.admin.dto.ModifyUserDTO;
 import com.app.admin.dto.UserDTO;
 import com.app.admin.mapper.UserMapper;
-import com.app.admin.model.Func.FuncModel;
+import com.app.admin.model.Func.Func;
 import com.app.admin.model.User.User;
 import com.app.admin.services.UserManageService;
 import com.app.admin.utils.JwtTokenUtil;
@@ -135,7 +135,7 @@ public class UserManageServiceImp implements UserManageService {
      * @param token
      * @return
      */
-    public List<FuncModel> funcList(String token)
+    public List<Func> funcList(String token)
     {
         long userId = Integer.valueOf(getTokenField(token,"userId"));
         return userMapper.funcList(userId);

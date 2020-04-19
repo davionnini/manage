@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 用户管理面板
+ */
+@RequestMapping("/user")
 @RestController
 public class LoginController {
 
@@ -17,11 +21,9 @@ public class LoginController {
     private UserManageService auth;
 
 
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
     public ReturnCode login(@RequestBody UserDTO user)
     {
-        System.out.println("dasas");
-        System.out.println(user.toString());
        String jws = auth.isLogin(user);
        if(jws == null){
            return ReturnCode.fail("用户不存在");
@@ -31,6 +33,12 @@ public class LoginController {
        token.put("token",jws);
        return ReturnCode.success(token);
 
+    }
+
+    @RequestMapping(value = "/logout")
+    public ReturnCode logout()
+    {
+        return ReturnCode.success();
     }
 
     @RequestMapping(value="/register")

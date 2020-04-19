@@ -8,6 +8,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+/**
+ * 全局配置类
+ */
 @Configuration
 @EnableAutoConfiguration
 public class GlobalCorsConfig {

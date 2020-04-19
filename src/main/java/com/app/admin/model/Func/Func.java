@@ -2,7 +2,7 @@ package com.app.admin.model.Func;
 
 import java.util.Date;
 
-public class FuncModel {
+public class Func {
     private long id;
 
     private String funcDesc;

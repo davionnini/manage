@@ -1,6 +1,6 @@
 package com.app.admin.mapper;
 
-import com.app.admin.model.Func.FuncModel;
+import com.app.admin.model.Func.Func;
 import com.app.admin.model.User.User;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -21,6 +21,6 @@ public interface UserMapper {
 
     Boolean updateByPrimaryKey(User user);
 
-    List<FuncModel> funcList(long userId);
+    List<Func> funcList(long userId);
 
 }

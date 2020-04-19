@@ -10,7 +10,7 @@
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
     </resultMap>
-    <resultMap id="FuncResultMap" type="com.app.admin.model.Func.FuncModel">
+    <resultMap id="FuncResultMap" type="com.app.admin.model.Func.Func">
         <id property="id" column="id" />
         <result property="funcName" column="func_name"/>
         <result property="funcDesc" column="func_desc"/>
@@ -46,12 +46,14 @@
 
     <select id="funcList" resultMap="FuncResultMap">
         SELECT
-	        d.*
+	        e.*
         FROM
 	        role_user AS a
-	        JOIN USER AS b ON a.user_id = b.id
+	        JOIN user AS b ON a.user_id = b.id
 	        JOIN role AS c ON a.role_id = c.id
 	        JOIN func_role AS d ON c.id = d.role_id
+	        JOIN func as e ON e.id = d.func_id
+	        WHERE b.id = #{id,jdbcType=BIGINT}
     </select>
 
     <update id="updateByPrimaryKey" parameterType="com.app.admin.model.User.User">
