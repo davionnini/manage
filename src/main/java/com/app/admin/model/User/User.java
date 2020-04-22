@@ -11,6 +11,8 @@ public class User {
 
     private String password;
 
+    private String roleName;
+
     private short isDelete;
 
     private Date createTime;
@@ -73,6 +75,14 @@ public class User {
         this.updateTime = updateTime;
     }
 
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -80,6 +90,7 @@ public class User {
                 ", userId=" + userId +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
+                ", roleName='" + roleName + '\'' +
                 ", isDelete=" + isDelete +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +

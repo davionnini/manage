@@ -2,12 +2,14 @@ package com.app.admin.controller;
 
 import com.app.admin.dto.ModifyUserDTO;
 import com.app.admin.dto.UserDTO;
+import com.app.admin.model.User.User;
 import com.app.admin.services.UserManageService;
 import com.app.standard.common.ReturnCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -60,6 +62,7 @@ public class LoginController {
     @RequestMapping(value="/all")
     public ReturnCode getAll()
     {
-        return ReturnCode.success(auth.userList());
+        List<User> users = auth.userList();
+        return ReturnCode.success(users);
     }
 }

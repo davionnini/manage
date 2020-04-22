@@ -16,4 +16,9 @@ public interface RoleMapper {
     Boolean updateByPrimaryKey(Role role);
 
     Boolean delete(long id);
+
+    List<Role> getByIds(List roleIds);
+
+    List<Role> getByUserId(long userId);
+
 }

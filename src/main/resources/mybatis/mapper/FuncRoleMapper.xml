@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.app.admin.mapper.FuncRoleMapper">
+    <resultMap id="requireResultMap" type="com.app.admin.model.FuncRole.FuncRole">
+        <id property="id" column="id" />
+        <result property="roleId" column="role_id"/>
+        <result property="funcId" column="func_id"/>
+        <result property="isDelete" column="is_delete"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+    <select id="getAll" resultMap="requireResultMap">
+        select * from func_role where is_delete = 1
+    </select>
+
+
+    <insert id="insert" parameterType="com.app.admin.model.FuncRole.FuncRole">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO func_role
+        (`role_id`,`func_id`)
+        VALUES
+        (#{roleId},#{funcId})
+    </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.app.admin.model.FuncRole.FuncRole">
+        UPDATE `func_role`
+        <set>
+            <if test="goodName != null">
+                `role_id` = #{roleId,jdbcType=VARCHAR},
+            </if>
+            <if test="count != null">
+                `func_id` = #{funcId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <delete id="delete" parameterType="java.lang.Long">
+        delete from func_role where id=#{id}
+    </delete>
+
+</mapper>

@@ -14,8 +14,29 @@
     </select>
 
     <select id="getById" parameterType="java.lang.Long" resultMap="requireResultMap">
-        select * from role where is_delete = 1 where id = #{id}
+        select * from role where is_delete = 1 AND id = #{id}
     </select>
+
+    <select id="getByIds" parameterType="java.util.List" resultMap="requireResultMap">
+        select * from role where is_delete = 1 AND id in
+        <foreach item="roleIds" index="index" collection="list"
+                 open="(" separator="," close=")">
+            #{roleIds}
+        </foreach>
+    </select>
+
+
+    <select id="getByUserId" parameterType="java.lang.Long" resultMap="requireResultMap">
+        SELECT
+        	a.*
+        FROM
+        	role AS a
+        	JOIN role_user AS b ON a.id = b.user_id
+        WHERE
+        	a.is_delete = 1 AND b.is_delete = 1
+        	AND b.user_id = #{userId}
+    </select>
+
 
     <insert id="insert" parameterType="com.app.admin.model.Role.Role">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">

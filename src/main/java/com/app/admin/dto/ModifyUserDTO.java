@@ -1,5 +1,7 @@
 package com.app.admin.dto;
 
+import java.util.List;
+
 public class ModifyUserDTO {
 
     String token;
@@ -7,8 +9,9 @@ public class ModifyUserDTO {
     //todo 替换成注解
     String username;
 
-
     String password;
+
+    List<Long> roleIds;
 
     public String getToken() {
         return token;
@@ -32,5 +35,13 @@ public class ModifyUserDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Long> getRoleIds() {
+        return roleIds;
+    }
+
+    public void setRoleIds(List<Long> roleIds) {
+        this.roleIds = roleIds;
     }
 }

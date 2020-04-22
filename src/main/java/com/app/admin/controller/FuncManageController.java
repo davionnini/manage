@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,13 +26,16 @@ public class FuncManageController<K,V>{
     {
         List<Func> list = powerManageService.funcAll();
 
+        List<MenuListVo> menulist = new ArrayList<>();
         MenuListVo menu = new MenuListVo();
         menu.setMenuId(1);
         menu.setMenuName("systemManage");
         menu.setMenuDesc("系统管理");
         menu.setLevel("root");
         menu.setChildren(list);
-        return ReturnCode.success(menu);
+        menulist.add(menu);
+
+        return ReturnCode.success(menulist);
     }
 
     @RequestMapping("/add")

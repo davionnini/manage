@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 菜单列表
  */
-public class MenuListVo {
+public class MenuListVo{
 
     long menuId;
 

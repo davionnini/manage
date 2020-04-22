@@ -6,6 +6,7 @@
         <result property="userId" column="user_id"/>
         <result property="userName" column="user_name"/>
         <result property="password" column="password"/>
+        <result property="roleName" column="role_desc"/>
         <result property="isDelete" column="is_delete"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
@@ -20,7 +21,16 @@
         <result property="updateTime" column="update_time"/>
     </resultMap>
     <select id="getAll" resultMap="userResultMap">
-        select * from user where is_delete = 1
+        SELECT
+        	a.*,c.role_desc
+        FROM
+        	USER AS a
+        	JOIN role_user AS b ON a.id = b.user_id
+        	JOIN role AS c ON b.role_id = c.id
+        WHERE
+        	a.is_delete = 1
+        	AND b.is_delete = 1
+        	AND c.is_delete = 1
     </select>
     <insert id="insert" parameterType="com.app.admin.model.User.User">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -60,7 +70,7 @@
         UPDATE `user`
         <set>
             <if test="password != null">
-                sort = #{password,jdbcType=VARCHAR},
+                password = #{password,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
