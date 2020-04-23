@@ -4,6 +4,7 @@ import com.app.admin.dto.ModifyUserDTO;
 import com.app.admin.dto.UserDTO;
 import com.app.admin.model.User.User;
 import com.app.admin.services.UserManageService;
+import com.app.standard.common.CommonPage;
 import com.app.standard.common.ReturnCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -60,9 +61,15 @@ public class LoginController {
     }
 
     @RequestMapping(value="/all")
-    public ReturnCode getAll()
+    public ReturnCode<CommonPage<User>> getAll(@RequestBody UserDTO user)
     {
         List<User> users = auth.userList();
-        return ReturnCode.success(users);
+        return ReturnCode.success(CommonPage.restPage(users));
+    }
+
+    @RequestMapping(value="/delete")
+    public ReturnCode deleteUser(@RequestBody ModifyUserDTO user)
+    {
+        return ReturnCode.success();
     }
 }

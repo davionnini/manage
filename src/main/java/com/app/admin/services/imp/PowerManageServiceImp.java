@@ -24,6 +24,7 @@ public class PowerManageServiceImp implements PowerManageService {
 
     public List<Func> funcAll()
     {
+
         return funcMapper.getAll();
     }
 

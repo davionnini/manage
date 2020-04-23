@@ -100,9 +100,12 @@ public class UserManageServiceImp implements UserManageService {
         User userModel = new User();
 
         if(userMapper.getByName(userDTO.getUsername()) == null){
+
+            //用户入库
             userModel.setPassword(userDTO.getPassword());
             userModel.setUserName(userDTO.getUsername());
             userModel.setUserId(System.currentTimeMillis());
+
             userMapper.insert(userModel);
         }
 
@@ -162,8 +165,6 @@ public class UserManageServiceImp implements UserManageService {
             roleUserMapper.insert(roleUserModel);
         }
 
-
-
         return true;
 
     }
@@ -175,7 +176,6 @@ public class UserManageServiceImp implements UserManageService {
      */
     public List<User> userList()
     {
-        PageHelper.startPage(2,10);
         return userMapper.getAll();
     }
 

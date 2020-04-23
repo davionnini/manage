@@ -61,6 +61,4 @@ public class ReturnCode<T>{
     {
         return new ReturnCode(ConfigCode.VALIDATE_FAILED.getCode(), message);
     }
-
-
 }
