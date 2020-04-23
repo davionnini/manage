@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.app.admin.mapper.FuncMapper">
+<mapper namespace="com.app.admin.dao.FuncMapper">
     <resultMap id="requireResultMap" type="com.app.admin.model.Func.Func">
         <id property="id" column="id" />
         <result property="funcDesc" column="func_desc"/>

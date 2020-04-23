@@ -8,7 +8,7 @@
 │           │   ├── config          ##全局配置类
 │           │   ├── controller      ##控制器层
 │           │   ├── dto             ##业务请求
-│           │   ├── mapper          ##mybatis对应配置里mapper
+│           │   ├── dao             ##mybatis对应配置里mapper
 │           │   ├── model           ##数据库model
 │           │   ├── services        ##业务逻辑层
 │           │   ├── utils           ##通用工具类

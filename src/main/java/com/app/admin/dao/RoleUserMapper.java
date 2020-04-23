@@ -1,4 +1,4 @@
-package com.app.admin.mapper;
+package com.app.admin.dao;
 
 import com.app.admin.model.RoleUser.RoleUser;
 import org.apache.ibatis.annotations.Mapper;

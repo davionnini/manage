@@ -2,9 +2,9 @@ package com.app.admin.services.imp;
 
 import com.app.admin.dto.ModifyUserDTO;
 import com.app.admin.dto.UserDTO;
-import com.app.admin.mapper.RoleMapper;
-import com.app.admin.mapper.RoleUserMapper;
-import com.app.admin.mapper.UserMapper;
+import com.app.admin.dao.RoleMapper;
+import com.app.admin.dao.RoleUserMapper;
+import com.app.admin.dao.UserMapper;
 import com.app.admin.model.Func.Func;
 import com.app.admin.model.Role.Role;
 import com.app.admin.model.RoleUser.RoleUser;
@@ -12,7 +12,6 @@ import com.app.admin.model.User.User;
 import com.app.admin.services.UserManageService;
 import com.app.admin.utils.JwtTokenUtil;
 
-import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.app.admin.mapper;
+package com.app.admin.dao;
 
 import com.app.admin.model.UserRequirementBind.UserRequirementBind;
 import org.apache.ibatis.annotations.Mapper;

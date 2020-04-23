@@ -2,8 +2,8 @@ package com.app.admin.services.imp;
 
 import com.app.admin.dto.FuncDTO;
 import com.app.admin.dto.RoleDTO;
-import com.app.admin.mapper.FuncMapper;
-import com.app.admin.mapper.RoleMapper;
+import com.app.admin.dao.FuncMapper;
+import com.app.admin.dao.RoleMapper;
 import com.app.admin.model.Func.Func;
 import com.app.admin.model.Role.Role;
 import com.app.admin.services.PowerManageService;

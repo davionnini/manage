@@ -1,8 +1,8 @@
 package com.app.admin.services.imp;
 
 import com.app.admin.dto.MaterialsDTO;
-import com.app.admin.mapper.RequirementMapper;
-import com.app.admin.mapper.UserRequireBindMapper;
+import com.app.admin.dao.RequirementMapper;
+import com.app.admin.dao.UserRequireBindMapper;
 import com.app.admin.model.Requirement.Requirement;
 import com.app.admin.model.UserRequirementBind.UserRequirementBind;
 import com.app.admin.services.MaterialsManageService;
