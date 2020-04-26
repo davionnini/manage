@@ -13,6 +13,8 @@ public class User {
 
     private String roleName;
 
+    private String roleId;
+
     private short isDelete;
 
     private Date createTime;
@@ -83,6 +85,14 @@ public class User {
         this.roleName = roleName;
     }
 
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -91,6 +101,7 @@ public class User {
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", roleName='" + roleName + '\'' +
+                ", roleId='" + roleId + '\'' +
                 ", isDelete=" + isDelete +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +

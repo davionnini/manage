@@ -1,5 +1,6 @@
 package com.app.admin.services.imp;
 
+import com.app.admin.dto.CommonDTO;
 import com.app.admin.dto.ModifyUserDTO;
 import com.app.admin.dto.UserDTO;
 import com.app.admin.dao.RoleMapper;
@@ -12,6 +13,7 @@ import com.app.admin.model.User.User;
 import com.app.admin.services.UserManageService;
 import com.app.admin.utils.JwtTokenUtil;
 
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -112,7 +114,7 @@ public class UserManageServiceImp implements UserManageService {
     }
 
     /**
-     * 修改用户信息
+     * 修改用户个人信息
      * @param userDTO
      * @return
      */
@@ -120,19 +122,19 @@ public class UserManageServiceImp implements UserManageService {
     {
         User userModel = new User();
 
-        long userId = Integer.valueOf(getTokenField(userDTO.getToken(),"userId"));
+        long userId = userDTO.getUserId();
+
+
+        //获取用户id
+        System.out.println(userDTO.toString());
+        userModel.setUserName(userDTO.getUsername());
+        userModel.setPassword(userDTO.getPassword());
+        userModel.setId(userDTO.getUserId());
 
         //更新用户信息
-        if(userMapper.getById(userId) != null){
-            userModel.setPassword(userDTO.getPassword());
-
-            //获取用户id
-            userModel.setId(userId);
-            userMapper.updateByPrimaryKey(userModel);
-        }
+        userMapper.updateByPrimaryKey(userModel);
 
         //更新角色
-
         //查询添加角色id是否存在
         List<Role> roles = roleMapper.getByUserId(userId);
         List<Long> roleIds = roles.stream().map(Role::getId).collect(toList());
@@ -168,13 +170,13 @@ public class UserManageServiceImp implements UserManageService {
 
     }
 
-
     /**
      * 用户列表
      * @return
      */
-    public List<User> userList()
+    public List<User> userList(CommonDTO commonDTO)
     {
+        PageHelper.startPage(commonDTO.getPageNum(),commonDTO.getPageSize());
         return userMapper.getAll();
     }
 
@@ -190,5 +192,22 @@ public class UserManageServiceImp implements UserManageService {
         return userMapper.funcList(userId);
     }
 
+
+    /**
+     * 获取用户信息
+     * @param userId
+     * @return
+     */
+    public User getUserById(Long userId)
+    {
+        return userMapper.getById(userId);
+    }
+
+
+    public Boolean deleteByUserId(Long userId)
+    {
+        userMapper.deleteById(userId);
+        return true;
+    }
 
 }

@@ -7,6 +7,7 @@
         <result property="userName" column="user_name"/>
         <result property="password" column="password"/>
         <result property="roleName" column="role_desc"/>
+        <result property="roleId" column="role_id"/>
         <result property="isDelete" column="is_delete"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
@@ -22,7 +23,7 @@
     </resultMap>
     <select id="getAll" resultMap="userResultMap">
         SELECT
-        	a.*,c.role_desc
+        	a.*,c.role_desc,c.id as role_id
         FROM
         	USER AS a
         	JOIN role_user AS b ON a.id = b.user_id
@@ -51,7 +52,17 @@
     </select>
 
     <select id="getById" parameterType="java.lang.Long" resultMap="userResultMap">
-          select * from user where is_delete = 1 and id = #{id}
+        SELECT
+        	a.*,c.role_desc,c.id as role_id
+        FROM
+        	USER AS a
+        	JOIN role_user AS b ON a.id = b.user_id
+        	JOIN role AS c ON b.role_id = c.id
+        WHERE
+        	a.is_delete = 1
+        	AND b.is_delete = 1
+        	AND c.is_delete = 1
+        	AND a.id = #{id}
     </select>
 
     <select id="funcList" resultMap="FuncResultMap">
@@ -69,11 +80,18 @@
     <update id="updateByPrimaryKey" parameterType="com.app.admin.model.User.User">
         UPDATE `user`
         <set>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
             <if test="password != null">
                 password = #{password,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE from `user` where id=#{id}
+    </delete>
 
 </mapper>

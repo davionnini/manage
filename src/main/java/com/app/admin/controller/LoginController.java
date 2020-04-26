@@ -1,7 +1,9 @@
 package com.app.admin.controller;
 
+import com.app.admin.dto.CommonDTO;
 import com.app.admin.dto.ModifyUserDTO;
 import com.app.admin.dto.UserDTO;
+import com.app.admin.dto.UserInfoDTO;
 import com.app.admin.model.User.User;
 import com.app.admin.services.UserManageService;
 import com.app.standard.common.CommonPage;
@@ -61,15 +63,22 @@ public class LoginController {
     }
 
     @RequestMapping(value="/all")
-    public ReturnCode<CommonPage<User>> getAll(@RequestBody UserDTO user)
+    public ReturnCode<CommonPage<User>> getAll(@RequestBody CommonDTO common)
     {
-        List<User> users = auth.userList();
+        List<User> users = auth.userList(common);
         return ReturnCode.success(CommonPage.restPage(users));
     }
 
     @RequestMapping(value="/delete")
-    public ReturnCode deleteUser(@RequestBody ModifyUserDTO user)
+    public ReturnCode deleteUser(@RequestBody UserInfoDTO user)
     {
+        auth.deleteByUserId(user.getUserId());
         return ReturnCode.success();
+    }
+
+    @RequestMapping(value="/info")
+    public ReturnCode info(@RequestBody UserInfoDTO user)
+    {
+        return ReturnCode.success(auth.getUserById(user.getUserId()));
     }
 }

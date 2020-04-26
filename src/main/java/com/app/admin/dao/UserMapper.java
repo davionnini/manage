@@ -23,4 +23,6 @@ public interface UserMapper {
 
     List<Func> funcList(long userId);
 
+    Boolean deleteById(Long id);
+
 }
