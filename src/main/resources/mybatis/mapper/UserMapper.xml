@@ -6,17 +6,24 @@
         <result property="userId" column="user_id"/>
         <result property="userName" column="user_name"/>
         <result property="password" column="password"/>
-        <result property="roleName" column="role_desc"/>
-        <result property="roleId" column="role_id"/>
         <result property="isDelete" column="is_delete"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
+        <collection property="roleList" column="id" select="com.app.admin.dao.RoleMapper.getByIdForUser"/>
     </resultMap>
     <resultMap id="FuncResultMap" type="com.app.admin.model.Func.Func">
         <id property="id" column="id" />
         <result property="funcName" column="func_name"/>
         <result property="funcDesc" column="func_desc"/>
         <result property="funcUrl" column="func_url"/>
+        <result property="isDelete" column="is_delete"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+    <resultMap id="RoleResultMap" type="com.app.admin.model.Role.Role">
+        <id property="id" column="role_id" />
+        <result property="roleName" column="role_name"/>
+        <result property="roleDesc" column="role_desc"/>
         <result property="isDelete" column="is_delete"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>

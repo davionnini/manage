@@ -17,16 +17,7 @@
         <result property="isDelete" column="is_delete"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
-        <collection property="funcList" javaType="java.util.List" ofType="com.app.admin.model.Func.Func" column="id" resultMap="funcResult" />
-    </resultMap>
-    <resultMap id="funcResult" type="com.app.admin.model.Func.Func">
-        <id property="id" column="func_id" />
-        <result property="funcDesc" column="func_desc"/>
-        <result property="funcName" column="func_name"/>
-        <result property="funcUrl" column="func_url"/>
-        <result property="isDelete" column="is_delete"/>
-        <result property="createTime" column="create_time"/>
-        <result property="updateTime" column="update_time"/>
+        <collection property="funcList" select="com.app.admin.dao.FuncMapper.getByIdForRole" column="id" />
     </resultMap>
     <select id="getAll" resultMap="requireResultMap">
         select * from role where is_delete = 1
@@ -36,12 +27,20 @@
         SELECT
         	*
         FROM
-        	role AS a
-        	JOIN func_role AS b ON a.id = b.role_id
-        	JOIN func	AS c ON c.id = b.func_id
+        	role
     </select>
     <select id="getById" parameterType="java.lang.Long" resultMap="requireResultMap">
         select * from role where is_delete = 1 AND id = #{id}
+    </select>
+
+    <select id="getByIdForUser" parameterType="java.lang.Long" resultMap="requireResultMap">
+        SELECT
+        	b.*
+        FROM
+        	role_user AS a
+        	JOIN role AS b ON a.role_id = b.id
+        WHERE
+        	a.user_id = #{userId}
     </select>
 
     <select id="getByIds" parameterType="java.util.List" resultMap="requireResultMap">

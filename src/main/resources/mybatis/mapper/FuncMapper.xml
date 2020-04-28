@@ -14,10 +14,19 @@
         select * from func where is_delete = 1
     </select>
 
-    <select id="getById" parameterType="java.lang.Integer" resultMap="requireResultMap">
+    <select id="getById" parameterType="java.lang.Long" resultMap="requireResultMap">
         select * from func where is_delete = 1 where id = #{id}
     </select>
 
+    <select id="getByIdForRole" resultMap="requireResultMap" parameterType="java.lang.Long">
+        SELECT
+        	b.*
+        FROM
+        	func_role AS a
+        	JOIN func AS b ON a.func_id = b.id
+        WHERE
+        	a.role_id = #{roleId}
+    </select>
     <insert id="insert" parameterType="com.app.admin.model.Func.Func">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
             SELECT LAST_INSERT_ID()

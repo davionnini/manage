@@ -170,4 +170,13 @@ public class PowerManageServiceImp implements PowerManageService {
         roleMapper.delete(id);
         return true;
     }
+
+    /**
+     * 角色列表
+     * @return
+     */
+    public List<Role> roleAll()
+    {
+        return roleMapper.getAll();
+    }
 }

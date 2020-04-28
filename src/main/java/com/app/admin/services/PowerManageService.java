@@ -27,4 +27,6 @@ public interface PowerManageService {
     Boolean deleteRole(long id);
 
     List<Role> roleList(CommonDTO commonDTO);
+
+    List<Role> roleAll();
 }

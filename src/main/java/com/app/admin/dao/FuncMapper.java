@@ -18,4 +18,6 @@ public interface FuncMapper {
 
     Boolean delete(long id);
 
+    List<Func> getByIdForRole(long roleId);
+
 }

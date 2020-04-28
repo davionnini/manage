@@ -59,4 +59,11 @@ public class RoleManageController {
         return ReturnCode.success(CommonPage.restPage(roles));
     }
 
+    @RequestMapping("/all")
+    public ReturnCode all(@RequestBody CommonDTO commonDTO)
+    {
+        List<Role> roles = powerManageService.roleAll();
+        return ReturnCode.success(CommonPage.restPage(roles));
+    }
+
 }
