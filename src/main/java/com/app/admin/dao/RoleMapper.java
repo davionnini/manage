@@ -21,4 +21,5 @@ public interface RoleMapper {
 
     List<Role> getByUserId(long userId);
 
+    List<Role> getAllWithFunc();
 }

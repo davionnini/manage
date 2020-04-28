@@ -17,10 +17,7 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 
@@ -120,13 +117,14 @@ public class UserManageServiceImp implements UserManageService {
      */
     public Boolean updateUserInfo(ModifyUserDTO userDTO)
     {
+        List<Long> increasedRoleIds = new ArrayList<>();
+        List<Long> lossRoleIds = new ArrayList<>();
         User userModel = new User();
 
         long userId = userDTO.getUserId();
 
 
         //获取用户id
-        System.out.println(userDTO.toString());
         userModel.setUserName(userDTO.getUsername());
         userModel.setPassword(userDTO.getPassword());
         userModel.setId(userDTO.getUserId());
@@ -136,34 +134,45 @@ public class UserManageServiceImp implements UserManageService {
 
         //更新角色
         //查询添加角色id是否存在
-        List<Role> roles = roleMapper.getByUserId(userId);
-        List<Long> roleIds = roles.stream().map(Role::getId).collect(toList());
+        List<RoleUser> roles = roleUserMapper.getByUserId(userId);
+        List<Long> roleIds = roles.stream().map(RoleUser::getRoleId).collect(toList());
 
+        for (RoleUser item:
+             roles) {
+            System.out.println(item.getRoleId());
+
+        }
 
         //新增的roleIds
         List<Long> addRoleIds = userDTO.getRoleIds();
 
-        //取并集入库
+        //转化
         addRoleIds = addRoleIds.parallelStream().collect(toList());
         roleIds = roleIds.parallelStream().collect(toList());
 
 
-        //addRoleIds的补集
-        addRoleIds.removeAll(roleIds);
+        //新增roleIds addRoleIds的补集
+        increasedRoleIds.addAll(addRoleIds);
+        increasedRoleIds.removeAll(roleIds);
 
-//        //并集
-//        addRoleIds.removeAll(roleIds);
-//        addRoleIds.addAll(roleIds);
 
-//        //交集
-//        addRoleIds.retainAll(roleIds);
+        //删除的roleIds roleIds的补集
+        lossRoleIds.addAll(roleIds);
+        lossRoleIds.removeAll(addRoleIds);
+
 
         //权限入库
         RoleUser roleUserModel = new RoleUser();
+
         roleUserModel.setUserId(userId);
-        for (Long roleId: addRoleIds) {
+        for (Long roleId: increasedRoleIds) {
             roleUserModel.setRoleId(roleId);
             roleUserMapper.insert(roleUserModel);
+        }
+
+        for (Long roleId: lossRoleIds) {
+            roleUserMapper.deleteByRoleIdAndUserId(roleId,userId);
+
         }
 
         return true;

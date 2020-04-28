@@ -10,7 +10,7 @@ public class RoleDTO {
 
     String desc;
 
-    List<Integer> funcIds;
+    List<Long> funcIds;
 
     public long getId() {
         return id;
@@ -36,11 +36,11 @@ public class RoleDTO {
         this.desc = desc;
     }
 
-    public List<Integer> getFuncIds() {
+    public List<Long> getFuncIds() {
         return funcIds;
     }
 
-    public void setFuncIds(List<Integer> funcIds) {
+    public void setFuncIds(List<Long> funcIds) {
         this.funcIds = funcIds;
     }
 }

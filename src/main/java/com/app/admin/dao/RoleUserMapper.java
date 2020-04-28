@@ -17,5 +17,8 @@ public interface RoleUserMapper {
 
     Boolean delete(long id);
 
+    List<RoleUser> getByUserId(Long userId);
+
+    Boolean deleteByRoleIdAndUserId(Long roleId, Long userId);
 
 }

@@ -4,7 +4,26 @@
     <resultMap id="requireResultMap" type="com.app.admin.model.Role.Role">
         <id property="id" column="id" />
         <result property="roleName" column="role_name"/>
-        <result property="roleDesc" column="func_desc"/>
+        <result property="roleDesc" column="role_desc"/>
+        <result property="isDelete" column="is_delete"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <resultMap id="complexResultMap" type="com.app.admin.model.Role.Role">
+        <id property="id" column="id" />
+        <result property="roleName" column="role_name"/>
+        <result property="roleDesc" column="role_desc"/>
+        <result property="isDelete" column="is_delete"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <collection property="funcList" javaType="java.util.List" ofType="com.app.admin.model.Func.Func" column="id" resultMap="funcResult" />
+    </resultMap>
+    <resultMap id="funcResult" type="com.app.admin.model.Func.Func">
+        <id property="id" column="func_id" />
+        <result property="funcDesc" column="func_desc"/>
+        <result property="funcName" column="func_name"/>
+        <result property="funcUrl" column="func_url"/>
         <result property="isDelete" column="is_delete"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
@@ -13,6 +32,14 @@
         select * from role where is_delete = 1
     </select>
 
+    <select id="getAllWithFunc" resultMap="complexResultMap">
+        SELECT
+        	*
+        FROM
+        	role AS a
+        	JOIN func_role AS b ON a.id = b.role_id
+        	JOIN func	AS c ON c.id = b.func_id
+    </select>
     <select id="getById" parameterType="java.lang.Long" resultMap="requireResultMap">
         select * from role where is_delete = 1 AND id = #{id}
     </select>
@@ -51,10 +78,10 @@
     <update id="updateByPrimaryKey" parameterType="com.app.admin.model.Role.Role">
         UPDATE `role`
         <set>
-            <if test="goodName != null">
+            <if test="roleName != null">
                 `role_name` = #{roleName,jdbcType=VARCHAR},
             </if>
-            <if test="count != null">
+            <if test="roleDesc != null">
                 `role_desc` = #{roleDesc,jdbcType=VARCHAR},
             </if>
         </set>

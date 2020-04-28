@@ -16,4 +16,10 @@ public interface FuncRoleMapper {
 
     Boolean delete(long id);
 
+    List<FuncRole> getByRoleId(long roleId);
+
+    Boolean insertBatch(List<FuncRole> funcRoleList);
+
+    Boolean deleteByFuncIdAndRoleId(long funcId, long roleId);
+
 }

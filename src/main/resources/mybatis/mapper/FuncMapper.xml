@@ -25,19 +25,19 @@
         INSERT INTO func
         (`func_name`,`func_desc`,`func_url`)
         VALUES
-        (#{funcName},#{desc},#{funcUrl})
+        (#{funcName},#{funcDesc},#{funcUrl})
     </insert>
 
     <update id="updateByPrimaryKey" parameterType="com.app.admin.model.Func.Func">
         UPDATE `func`
         <set>
-            <if test="goodName != null">
+            <if test="funcName != null">
                 `func_name` = #{funcName,jdbcType=VARCHAR},
             </if>
-            <if test="count != null">
+            <if test="funcDesc != null">
                 `func_desc` = #{funcDesc,jdbcType=VARCHAR},
             </if>
-            <if test="describe != null">
+            <if test="funcUrl != null">
                 `func_url` = #{funcUrl,jdbcType=VARCHAR},
             </if>
         </set>

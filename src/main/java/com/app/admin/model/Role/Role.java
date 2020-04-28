@@ -1,6 +1,9 @@
 package com.app.admin.model.Role;
 
+import com.app.admin.model.Func.Func;
+
 import java.util.Date;
+import java.util.List;
 
 public class Role {
     private long id;
@@ -8,6 +11,8 @@ public class Role {
     private String roleDesc;
 
     private String roleName;
+
+    private List<Func> funcList;
 
     private short isDelete;
 
@@ -21,6 +26,14 @@ public class Role {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public List<Func> getFuncList() {
+        return funcList;
+    }
+
+    public void setFuncList(List<Func> funcList) {
+        this.funcList = funcList;
     }
 
     public String getRoleDesc() {

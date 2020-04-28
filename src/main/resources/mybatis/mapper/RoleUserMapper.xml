@@ -10,9 +10,12 @@
         <result property="updateTime" column="update_time"/>
     </resultMap>
     <select id="getAll" resultMap="requireResultMap">
-        select * from role_user where is_delete = 1
+        SELECT * FROM role_user WHERE is_delete = 1
     </select>
 
+    <select id="getByUserId" resultMap="requireResultMap" parameterType="java.lang.Long">
+        SELECT * FROM role_user WHERE is_delete = 1 and user_id = #{userId}
+    </select>
 
     <insert id="insert" parameterType="com.app.admin.model.RoleUser.RoleUser">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -40,4 +43,8 @@
         delete from role_user where id=#{id}
     </delete>
 
+    <delete id="deleteByRoleIdAndUserId" parameterType="java.lang.Long">
+        delete from role_user where user_id=#{userId} AND
+        role_id = #{roleId}
+    </delete>
 </mapper>

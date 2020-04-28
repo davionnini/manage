@@ -13,6 +13,9 @@
         select * from func_role where is_delete = 1
     </select>
 
+    <select id="getByRoleId" resultMap="requireResultMap">
+        select * from func_role where is_delete = 1 and role_id = #{roleId}
+    </select>
 
     <insert id="insert" parameterType="com.app.admin.model.FuncRole.FuncRole">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -24,13 +27,21 @@
         (#{roleId},#{funcId})
     </insert>
 
+    <insert id="insertBatch" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO func_role
+        (`role_id`,`func_id`)
+        VALUES
+        <foreach item="FuncRole" collection="java.util.List" separator=",">
+            (#{item.roleId},#{item.funcId})
+        </foreach>
+    </insert>
     <update id="updateByPrimaryKey" parameterType="com.app.admin.model.FuncRole.FuncRole">
         UPDATE `func_role`
         <set>
-            <if test="goodName != null">
+            <if test="roleId != null">
                 `role_id` = #{roleId,jdbcType=VARCHAR},
             </if>
-            <if test="count != null">
+            <if test="funcId != null">
                 `func_id` = #{funcId,jdbcType=VARCHAR},
             </if>
         </set>
@@ -40,4 +51,7 @@
         delete from func_role where id=#{id}
     </delete>
 
+    <delete id="deleteByFuncIdAndRoleId">
+        delete from func_role where func_id=#{funcId} and role_id = #{roleId}
+    </delete>
 </mapper>
