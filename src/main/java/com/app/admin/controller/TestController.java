@@ -1,6 +1,7 @@
 package com.app.admin.controller;
 
 import com.app.admin.dao.RoleMapper;
+import com.app.admin.dao.UserMapper;
 import com.app.admin.model.Role.Role;
 import com.app.admin.utils.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,13 @@ public class TestController {
     @Autowired
     RoleMapper roleMapper;
 
+    @Autowired
+    UserMapper userMapper;
+
     @RequestMapping("/test")
     public List<Role> test()
     {
+        System.out.println(userMapper.getById(4).toString());
         List<Integer> list1 = new ArrayList<>();
         List<Integer> list2 = new ArrayList<>();
         List<Integer> collect = new ArrayList<>();

@@ -30,15 +30,9 @@
     </resultMap>
     <select id="getAll" resultMap="userResultMap">
         SELECT
-        	a.*,c.role_desc,c.id as role_id
+        	a.*
         FROM
         	USER AS a
-        	JOIN role_user AS b ON a.id = b.user_id
-        	JOIN role AS c ON b.role_id = c.id
-        WHERE
-        	a.is_delete = 1
-        	AND b.is_delete = 1
-        	AND c.is_delete = 1
     </select>
     <insert id="insert" parameterType="com.app.admin.model.User.User">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -54,10 +48,16 @@
           select * from user where is_delete = 1 and user_name = #{username} AND password = #{password}
     </select>
 
-    <select id="getByName" parameterType="java.lang.String" resultMap="userResultMap">
+    <select id="getByName" resultMap="userResultMap">
           select * from user where is_delete = 1 and user_name = #{username}
     </select>
 
+    <select id="getByLikeName"  parameterType="com.app.admin.model.User.User" resultMap="userResultMap">
+        select * from user where is_delete = 1
+        <if test="userName != null">
+            and user_name like CONCAT('%', #{userName}, '%')
+        </if>
+    </select>
     <select id="getById" parameterType="java.lang.Long" resultMap="userResultMap">
         SELECT
         	a.*,c.role_desc,c.id as role_id

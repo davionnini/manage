@@ -14,9 +14,6 @@ public class User {
 
     private String password;
 
-    private String roleName;
-
-    private String roleId;
 
     private short isDelete;
 
@@ -82,22 +79,6 @@ public class User {
         this.updateTime = updateTime;
     }
 
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
-
-    public String getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(String roleId) {
-        this.roleId = roleId;
-    }
-
     public List<Role> getRoleList() {
         return roleList;
     }
@@ -113,8 +94,6 @@ public class User {
                 ", userId=" + userId +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
-                ", roleName='" + roleName + '\'' +
-                ", roleId='" + roleId + '\'' +
                 ", isDelete=" + isDelete +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +

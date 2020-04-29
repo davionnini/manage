@@ -6,6 +6,7 @@ import com.app.admin.dto.UserDTO;
 import com.app.admin.dao.RoleMapper;
 import com.app.admin.dao.RoleUserMapper;
 import com.app.admin.dao.UserMapper;
+import com.app.admin.dto.UserInfoDTO;
 import com.app.admin.model.Func.Func;
 import com.app.admin.model.Role.Role;
 import com.app.admin.model.RoleUser.RoleUser;
@@ -137,11 +138,6 @@ public class UserManageServiceImp implements UserManageService {
         List<RoleUser> roles = roleUserMapper.getByUserId(userId);
         List<Long> roleIds = roles.stream().map(RoleUser::getRoleId).collect(toList());
 
-        for (RoleUser item:
-             roles) {
-            System.out.println(item.getRoleId());
-
-        }
 
         //新增的roleIds
         List<Long> addRoleIds = userDTO.getRoleIds();
@@ -217,6 +213,19 @@ public class UserManageServiceImp implements UserManageService {
     {
         userMapper.deleteById(userId);
         return true;
+    }
+
+    /**
+     * 用户模糊查询
+     * @param userInfoDTO
+     * @return
+     */
+    public List<User> getUserByName(UserInfoDTO userInfoDTO)
+    {
+        User user = new User();
+        user.setUserName(userInfoDTO.getUserName());
+        PageHelper.startPage(userInfoDTO.getPageNum(),userInfoDTO.getPageSize());
+        return userMapper.getByLikeName(user);
     }
 
 }

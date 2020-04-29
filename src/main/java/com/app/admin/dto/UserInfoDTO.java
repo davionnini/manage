@@ -1,6 +1,6 @@
 package com.app.admin.dto;
 
-public class UserInfoDTO {
+public class UserInfoDTO extends CommonDTO{
 
     Long userId;
 

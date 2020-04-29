@@ -3,6 +3,7 @@ package com.app.admin.services;
 import com.app.admin.dto.CommonDTO;
 import com.app.admin.dto.ModifyUserDTO;
 import com.app.admin.dto.UserDTO;
+import com.app.admin.dto.UserInfoDTO;
 import com.app.admin.model.Func.Func;
 import com.app.admin.model.User.User;
 
@@ -27,6 +28,8 @@ public interface UserManageService {
     List<Func> funcList(String token);
 
     User getUserById(Long userId);
+
+    List<User> getUserByName(UserInfoDTO username);
 
     Boolean deleteByUserId(Long userId);
 }

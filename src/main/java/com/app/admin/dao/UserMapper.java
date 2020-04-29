@@ -25,4 +25,7 @@ public interface UserMapper {
 
     Boolean deleteById(Long id);
 
+    List<User> getByLikeName(User user);
+
+
 }

@@ -77,8 +77,8 @@ public class LoginController {
     }
 
     @RequestMapping(value="/info")
-    public ReturnCode info(@RequestBody UserInfoDTO user)
+    public ReturnCode info(@RequestBody UserInfoDTO userSearch)
     {
-        return ReturnCode.success(auth.getUserById(user.getUserId()));
+        return ReturnCode.success(CommonPage.restPage(auth.getUserByName(userSearch)));
     }
 }
