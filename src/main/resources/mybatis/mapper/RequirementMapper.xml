@@ -3,6 +3,7 @@
 <mapper namespace="com.app.admin.dao.RequirementMapper">
     <resultMap id="requireResultMap" type="com.app.admin.model.Requirement.Requirement">
         <id property="id" column="id" />
+        <result property="creatorId" column="creator_id"/>
         <result property="orderId" column="order_id"/>
         <result property="goodName" column="good_name"/>
         <result property="count" column="count"/>
@@ -11,17 +12,26 @@
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
     </resultMap>
-    <select id="getAll" resultMap="requireResultMap">
-        select * from requirement where is_delete = 1
+    <select id="getAllIgnoreBind" resultMap="requireResultMap">
+        SELECT
+            a.*
+        FROM
+            requirement AS a
+            LEFT JOIN user_reqiurement_bind AS b ON ( a.id = b.requirement_id AND a.creator_id = b.user_id )
+        WHERE
+	        a.is_delete = 1 AND b.id IS NULL
+    </select>
+    <select id="getByRequireId" parameterType="java.lang.Long" resultMap="requireResultMap">
+        select * from requirement where is_delete = 1 and id = #{requireId}
     </select>
     <insert id="insert" parameterType="com.app.admin.model.Requirement.Requirement">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
             SELECT LAST_INSERT_ID()
         </selectKey>
         INSERT INTO requirement
-        (`good_name`,`count`,`describe`,`order_id`)
+        (`creator_id`,`good_name`,`count`,`describe`,`order_id`)
         VALUES
-        (#{goodName},#{count},#{describe},#{orderId})
+        (#{creatorId},#{goodName},#{count},#{describe},#{orderId})
     </insert>
 
     <select id="getByName" parameterType="java.lang.String" resultMap="requireResultMap">

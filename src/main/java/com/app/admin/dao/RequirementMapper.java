@@ -10,7 +10,9 @@ public interface RequirementMapper {
 
     long insert(Requirement require);
 
-    List<Requirement> getAll();
+    List<Requirement> getAllIgnoreBind();
 
     Boolean updateByPrimaryKey(Requirement require);
+
+    Requirement getByRequireId(long requireId);
 }

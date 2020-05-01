@@ -3,7 +3,7 @@ package com.app.admin.dto;
 /**
  * 用户发布订单参数
  */
-public class MaterialsDTO {
+public class MaterialsDTO extends CommonDTO{
 
     long id;
 
@@ -12,8 +12,6 @@ public class MaterialsDTO {
     String describe;
 
     String goodName;
-
-    String token;
 
     public long getId() {
         return id;
@@ -47,11 +45,4 @@ public class MaterialsDTO {
         this.goodName = goodName;
     }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
 }

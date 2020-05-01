@@ -8,6 +8,8 @@ public class Requirement {
 
     private long orderId;
 
+    private long creatorId;
+
     private String describe;
 
     private String goodName;
@@ -26,6 +28,14 @@ public class Requirement {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(long creatorId) {
+        this.creatorId = creatorId;
     }
 
     public long getOrderId() {

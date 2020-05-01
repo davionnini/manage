@@ -10,8 +10,29 @@
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
     </resultMap>
+
+    <resultMap id="complexResultMap" type="com.app.admin.model.UserRequirementBind.UserRequirementBind">
+        <id property="id" column="id" />
+        <result property="userId" column="user_id"/>
+        <result property="requirementId" column="requirement_id"/>
+        <result property="isBind" column="is_bind"/>
+        <result property="isDelete" column="is_delete"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <collection property="requirementList" select="com.app.admin.dao.RequirementMapper.getByRequireId" column="id" />
+    </resultMap>
+
     <select id="getAll" resultMap="bindResultMap">
         select * from user_reqiurement_bind where is_delete = 1
+    </select>
+
+    <select id="getByRequireIdAndUserId" resultMap="bindResultMap">
+        select * from user_reqiurement_bind where is_delete = 1 and user_id = #{userId} and
+        requirement_id = #{requireId}
+    </select>
+
+    <select id="getByUserId" parameterType="java.lang.Long" resultMap="complexResultMap">
+        select * from user_reqiurement_bind where is_delete = 1 and user_id = #{userId}
     </select>
     <insert id="insert" parameterType="com.app.admin.dao.UserRequireBindMapper">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">

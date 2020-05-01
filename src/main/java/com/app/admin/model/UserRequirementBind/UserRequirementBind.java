@@ -1,6 +1,9 @@
 package com.app.admin.model.UserRequirementBind;
 
+import com.app.admin.model.Requirement.Requirement;
+
 import java.util.Date;
+import java.util.List;
 
 public class UserRequirementBind {
 
@@ -11,6 +14,8 @@ public class UserRequirementBind {
     private long requirementId;
 
     private short isBind;
+
+    private List<Requirement> requirementList;
 
     private short isDelete;
 
