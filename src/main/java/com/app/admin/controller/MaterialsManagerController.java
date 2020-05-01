@@ -52,6 +52,7 @@ public class MaterialsManagerController {
     @RequestMapping("/bind")
     public ReturnCode bind(@RequestBody UserBindDTO userBindDTO)
     {
+        materialsManageService.bind(userBindDTO);
         return ReturnCode.success();
     }
 

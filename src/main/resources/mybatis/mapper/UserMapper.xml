@@ -48,6 +48,10 @@
           select * from user where is_delete = 1 and user_name = #{username} AND password = #{password}
     </select>
 
+    <select id="getByIdNotJoin" resultMap="userResultMap">
+          select * from user where is_delete = 1 and id = #{userId}
+    </select>
+
     <select id="getByName" resultMap="userResultMap">
           select * from user where is_delete = 1 and user_name = #{username}
     </select>

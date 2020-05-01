@@ -48,7 +48,7 @@ public class MaterialsManageServiceImp implements MaterialsManageService {
     {
         Requirement requirementModel = new Requirement();
 
-        UserRequirementBind bindModel = new UserRequirementBind();
+//        UserRequirementBind bindModel = new UserRequirementBind();
 
         long userId = Integer.valueOf(jwtTokenUtil.getBodyField(materialsDTO.getToken(),"userId"));
 
@@ -61,9 +61,9 @@ public class MaterialsManageServiceImp implements MaterialsManageService {
         requirement.insert(requirementModel);
 
 
-        bindModel.setRequirementId(requirementModel.getId());
-        bindModel.setUserId(userId);
-        userRequireBindMapper.insert(bindModel);
+//        bindModel.setRequirementId(requirementModel.getId());
+//        bindModel.setUserId(userId);
+//        userRequireBindMapper.insert(bindModel);
 
         return true;
     }

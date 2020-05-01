@@ -27,5 +27,5 @@ public interface UserMapper {
 
     List<User> getByLikeName(User user);
 
-
+    User getByIdNotJoin(long userId);
 }

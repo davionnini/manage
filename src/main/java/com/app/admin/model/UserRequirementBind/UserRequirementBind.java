@@ -78,4 +78,12 @@ public class UserRequirementBind {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    public List<Requirement> getRequirementList() {
+        return requirementList;
+    }
+
+    public void setRequirementList(List<Requirement> requirementList) {
+        this.requirementList = requirementList;
+    }
 }
