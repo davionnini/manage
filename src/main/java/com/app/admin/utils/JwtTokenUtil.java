@@ -1,6 +1,5 @@
 package com.app.admin.utils;
 
-import com.oracle.tools.packager.Log;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -61,7 +60,6 @@ public class JwtTokenUtil {
         try{
             Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(jwtString);
         }catch (Exception e){
-            Log.debug(e.getMessage());
             return false;
         }
         return true;
