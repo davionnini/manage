@@ -41,7 +41,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/logout")
-    public ReturnCode logout()
+    public ReturnCode logout(@RequestBody CommonDTO common)
     {
         return ReturnCode.success();
     }
