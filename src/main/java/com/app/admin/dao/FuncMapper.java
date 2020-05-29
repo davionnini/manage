@@ -1,5 +1,6 @@
 package com.app.admin.dao;
 
+import com.app.admin.dto.CommonDTO;
 import com.app.admin.model.Func.Func;
 import org.apache.ibatis.annotations.Mapper;
 

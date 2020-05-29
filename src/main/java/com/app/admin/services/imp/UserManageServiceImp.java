@@ -14,6 +14,7 @@ import com.app.admin.model.User.User;
 import com.app.admin.services.UserManageService;
 import com.app.admin.utils.JwtTokenUtil;
 
+import com.app.admin.utils.UniqueIdUtil;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -97,15 +98,23 @@ public class UserManageServiceImp implements UserManageService {
     public Boolean userRegister(UserDTO userDTO){
 
         User userModel = new User();
+        RoleUser roleUser = new RoleUser();
 
         if(userMapper.getByName(userDTO.getUsername()) == null){
 
             //用户入库
             userModel.setPassword(userDTO.getPassword());
             userModel.setUserName(userDTO.getUsername());
-            userModel.setUserId(System.currentTimeMillis());
+            userModel.setUserId(UniqueIdUtil.nextId());
 
             userMapper.insert(userModel);
+
+            roleUser.setUserId(userModel.getId());
+
+            //权限入库
+            long roleId = 2;
+            roleUser.setRoleId(roleId);
+            roleUserMapper.insert(roleUser);
         }
 
         return true;

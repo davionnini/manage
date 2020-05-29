@@ -9,6 +9,7 @@ import com.app.admin.model.Requirement.Requirement;
 import com.app.admin.model.UserRequirementBind.UserRequirementBind;
 import com.app.admin.services.MaterialsManageService;
 import com.app.admin.utils.JwtTokenUtil;
+import com.app.admin.utils.UniqueIdUtil;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,7 +58,7 @@ public class MaterialsManageServiceImp implements MaterialsManageService {
         requirementModel.setCount(materialsDTO.getCount());
         requirementModel.setGoodName(materialsDTO.getGoodName());
         requirementModel.setDescribe(materialsDTO.getDescribe());
-        requirementModel.setOrderId(System.currentTimeMillis());
+        requirementModel.setOrderId(UniqueIdUtil.nextId());
         requirement.insert(requirementModel);
 
 

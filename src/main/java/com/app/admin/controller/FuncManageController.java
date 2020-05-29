@@ -1,5 +1,6 @@
 package com.app.admin.controller;
 
+import com.app.admin.dto.CommonDTO;
 import com.app.admin.dto.FuncDTO;
 import com.app.admin.model.Func.Func;
 import com.app.admin.services.PowerManageService;
@@ -21,9 +22,9 @@ public class FuncManageController{
     private PowerManageService powerManageService;
 
     @RequestMapping("/list")
-    public ReturnCode<CommonPage<Func>> funcList()
+    public ReturnCode<CommonPage<Func>> funcList(@RequestBody CommonDTO commonDTO)
     {
-        List<Func> list = powerManageService.funcAll();
+        List<Func> list = powerManageService.funcAll(commonDTO);
 
         return ReturnCode.success(CommonPage.restPage(list));
     }
@@ -35,4 +36,11 @@ public class FuncManageController{
         return ReturnCode.success();
     }
 
+    @RequestMapping("/all")
+    public ReturnCode<CommonPage<Func>> funcList()
+    {
+        List<Func> list = powerManageService.funcAll();
+
+        return ReturnCode.success(CommonPage.restPage(list));
+    }
 }

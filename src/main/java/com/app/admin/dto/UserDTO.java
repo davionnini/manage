@@ -11,6 +11,7 @@ public class UserDTO {
 
     String password;
 
+    int role;
 
     public String getUsername() {
         return username;
@@ -26,5 +27,13 @@ public class UserDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 }

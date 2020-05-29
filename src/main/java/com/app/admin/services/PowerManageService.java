@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface PowerManageService {
 
-    List<Func> funcAll();
+    List<Func> funcAll(CommonDTO commonDTO);
 
     @Transactional
     Boolean addFunc(FuncDTO funcDTO);
@@ -29,4 +29,7 @@ public interface PowerManageService {
     List<Role> roleList(CommonDTO commonDTO);
 
     List<Role> roleAll();
+
+    List<Func> funcAll();
+
 }

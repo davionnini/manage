@@ -33,16 +33,23 @@ public class PowerManageServiceImp implements PowerManageService {
     private FuncRoleMapper funcRoleMapper;
 
     /**
+     * 功能列表分页
+     * @return
+     */
+    public List<Func> funcAll(CommonDTO commonDTO)
+    {
+        PageHelper.startPage(commonDTO.getPageNum(),commonDTO.getPageSize());
+        return funcMapper.getAll();
+    }
+
+    /**
      * 功能列表
      * @return
      */
     public List<Func> funcAll()
     {
-//        PageHelper.startPage(commonDTO.getPageNum(),commonDTO.getPageSize());
         return funcMapper.getAll();
     }
-
-
     /**
      * 菜单添加
      * @param funcDTO

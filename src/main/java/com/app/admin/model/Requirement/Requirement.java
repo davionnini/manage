@@ -1,6 +1,9 @@
 package com.app.admin.model.Requirement;
 
+import com.app.admin.model.User.User;
+
 import java.util.Date;
+import java.util.List;
 
 public class Requirement {
 
@@ -21,6 +24,10 @@ public class Requirement {
     private Date createTime;
 
     private Date updateTime;
+
+    private String userName;
+
+    private String bindName;
 
     public long getId() {
         return id;
@@ -92,5 +99,20 @@ public class Requirement {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getBindName() {
+        return bindName;
+    }
+
+    public void setBindName(String bindName) {
+        this.bindName = bindName;
     }
 }

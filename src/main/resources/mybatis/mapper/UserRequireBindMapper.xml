@@ -21,11 +21,9 @@
         <result property="isDelete" column="is_delete"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
+        <result property="bindName" column="bind_name"/>
+        <result property="userName" column="user_name"/>
     </resultMap>
-
-    <select id="getAll" resultMap="bindResultMap">
-        select * from user_reqiurement_bind where is_delete = 1
-    </select>
 
     <select id="getByRequireIdAndUserId" resultMap="bindResultMap">
         select * from user_reqiurement_bind where is_delete = 1 and user_id = #{userId} and
@@ -34,10 +32,12 @@
 
     <select id="getByUserId" parameterType="java.lang.Long" resultMap="requireResultMap">
         SELECT
-            a.*
+            a.*,c.user_name as bind_name,d.user_name as user_name
         FROM
             requirement AS a
             LEFT JOIN user_reqiurement_bind AS b ON ( a.id = b.requirement_id)
+            LEFT JOIN user as c ON (b.user_id = c.id)
+            LEFT JOIN user as d ON (a.creator_id = d.id)
         WHERE
 	        a.is_delete = 1 AND b.is_delete = 1 AND b.user_id = #{userId}
     </select>
@@ -50,25 +50,4 @@
         VALUES
             (#{userId},#{requirementId})
     </insert>
-
-    <select id="getByNameAndPassword" parameterType="java.lang.String" resultMap="bindResultMap">
-          select * from user where is_delete = 1 and user_name = #{username} AND password = #{password}
-    </select>
-
-    <select id="getByName" parameterType="java.lang.String" resultMap="bindResultMap">
-          select * from user_reqiurement_bind where is_delete = 1 and user_name = #{username}
-    </select>
-
-    <update id="updateByPrimaryKey" parameterType="com.app.admin.dao.UserRequireBindMapper">
-        UPDATE `user_reqiurement_bind`
-        <set>
-            <if test="username != null">
-                name = #{username,jdbcType=VARCHAR},
-            </if>
-            <if test="password != null">
-                sort = #{password,jdbcType=INTEGER},
-            </if>
-        </set>
-        where id = #{id,jdbcType=BIGINT}
-    </update>
 </mapper>

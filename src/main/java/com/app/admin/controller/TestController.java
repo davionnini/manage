@@ -4,6 +4,7 @@ import com.app.admin.dao.RoleMapper;
 import com.app.admin.dao.UserMapper;
 import com.app.admin.model.Role.Role;
 import com.app.admin.utils.JwtTokenUtil;
+import com.app.admin.utils.UniqueIdUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,12 +18,16 @@ public class TestController {
     @Autowired
     JwtTokenUtil jwt;
 
+
     @Autowired
     RoleMapper roleMapper;
 
     @Autowired
     UserMapper userMapper;
 
+    public static void main(String[] args){
+       System.out.println(UniqueIdUtil.nextId());
+    }
     @RequestMapping("/test")
     public List<Role> test()
     {

@@ -12,12 +12,25 @@
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
     </resultMap>
-    <select id="getAllIgnoreBind" resultMap="requireResultMap">
+    <resultMap id="requireWithUserResultMap" type="com.app.admin.model.Requirement.Requirement">
+        <id property="id" column="id" />
+        <result property="creatorId" column="creator_id"/>
+        <result property="orderId" column="order_id"/>
+        <result property="goodName" column="good_name"/>
+        <result property="count" column="count"/>
+        <result property="describe" column="describe"/>
+        <result property="isDelete" column="is_delete"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="userName" column="user_name"/>
+    </resultMap>
+    <select id="getAllIgnoreBind" resultMap="requireWithUserResultMap">
         SELECT
-            a.*
+            a.*,c.user_name
         FROM
             requirement AS a
             LEFT JOIN user_reqiurement_bind AS b ON ( a.id = b.requirement_id AND a.creator_id = b.user_id )
+            LEFT JOIN user as c ON (a.creator_id = c.id)
         WHERE
 	        a.is_delete = 1 AND b.id IS NULL
     </select>
